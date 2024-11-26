@@ -1,19 +1,28 @@
+// Fetch Pokémon data from the API
+let allPokemon = [];
 
 // Fetch Pokémon data from the API
 fetch('http://localhost:3000/pokemon/all')
     .then(response => response.json())
     .then(data => {
-        displayPokemon(data);
+        allPokemon = data; // Save data globally for searching
+        displayPokemon(allPokemon);
     })
     .catch(error => console.error('Error fetching data:', error));
 
 // Function to display Pokémon data in a table
 function displayPokemon(pokemonList) {
     const tableBody = document.getElementById('pokemon-table-body');
+    tableBody.innerHTML = ''; // Clear the table before adding new rows
 
     pokemonList.forEach(pokemon => {
-        // Create a row for each Pokémon
         const row = document.createElement('tr');
+        const imageCell = document.createElement('td');
+        const image = document.createElement('img');
+        image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokedex_number}.png`;
+        image.alt = pokemon.name;
+        imageCell.appendChild(image);
+        row.appendChild(imageCell)
 
         // add pokedex_number
         const pokedexCell = document.createElement('td');
@@ -49,15 +58,17 @@ function displayPokemon(pokemonList) {
 
         // Add Pokémon primary type
         const primaryTypeCell = document.createElement('td');
-        primaryTypeCell.textContent = pokemon.primary_type;
+        const primaryTypeButton = document.createElement('button');
+        primaryTypeButton.textContent = pokemon.primary_type;
+        primaryTypeButton.classList.add('type-button', `type-${pokemon.primary_type.toLowerCase()}`);
+        primaryTypeCell.appendChild(primaryTypeButton);
 
         // add secondary type
         const secondaryTypeCell = document.createElement('td');
-        if (pokemon.secondary_type !== "null") {
-            secondaryTypeCell.textContent = pokemon.secondary_type;
-        } else {
-            secondaryTypeCell.textContent = '';
-        }
+        const secondaryTypeButton = document.createElement('button');
+        secondaryTypeButton.textContent = pokemon.secondary_type;
+        secondaryTypeButton.classList.add('type-button', `type-${pokemon.secondary_type.toLowerCase()}`);
+        secondaryTypeCell.appendChild(secondaryTypeButton);
 
         // Append cells to the row
         row.appendChild(pokedexCell);
@@ -71,11 +82,27 @@ function displayPokemon(pokemonList) {
         row.appendChild(primaryTypeCell);
         row.appendChild(secondaryTypeCell);
 
+
+
         // Append row to the table body
         tableBody.appendChild(row);
     });
 }
 
+// Search function
+document.getElementById('search').addEventListener('input', function (e) {
+    const searchQuery = e.target.value.toLowerCase();
 
+    // Filter Pokémon list based on name or type
+    const filteredPokemon = allPokemon.filter(pokemon => {
+        return (
+            pokemon.name.toLowerCase().includes(searchQuery) ||
+            (pokemon.primary_type && pokemon.primary_type.toLowerCase().includes(searchQuery)) ||
+            (pokemon.secondary_type && pokemon.secondary_type.toLowerCase().includes(searchQuery))
+        );
+    });
 
+    // Update the displayed Pokémon
+    displayPokemon(filteredPokemon);
+});
 

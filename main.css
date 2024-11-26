@@ -17,6 +17,15 @@ h1 {
     margin: 0;
 }
 
+header input#search {
+    margin-top: 10px;
+    padding: 10px;
+    width: 50%;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
 /* Table Styles */
 #pokemon-table-container {
     margin: 20px;
@@ -63,4 +72,95 @@ tr:hover {
         width: 40px;
         height: 40px;
     }
+}
+
+.type-button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 1em;
+    color: white;
+    text-transform: uppercase;
+    pointer-events: none;
+    cursor: default;
+}
+
+.type-grass {
+    background-color: lawngreen;
+}
+
+.type-poison {
+    background-color: mediumpurple;
+}
+
+.type-fire {
+    background-color: orange;
+}
+
+.type-water {
+    background-color: lightblue;
+}
+
+.type-electric {
+    background-color: yellow;
+}
+
+.type-ice {
+    background-color: aquamarine;
+}
+
+.type-psychic {
+    background-color: khaki;
+}
+
+.type-rock {
+    background-color: black;
+}
+
+.type-fighting {
+    background-color: darkred;
+}
+
+.type-flying {
+    background-color: indigo;
+}
+
+.type-ground {
+    background-color: darkolivegreen;
+}
+
+.type-null {
+    background-color: darkgrey;
+}
+
+.type-bug {
+    background-color: greenyellow;
+}
+
+.type-normal {
+    background-color: deeppink;
+}
+
+.type-ghost {
+    background-color: dimgray;
+}
+
+.type-fairy {
+    background-color: blue;
+}
+
+.type-steel {
+    background-color: darkslategrey;
+}
+
+.type-dragon {
+    background-color: indianred;
+}
+
+#pokemon-table img {
+    border: none;
+    display: block;
+    margin: 0 auto;
+    width: 70px;
+    height: 70px;
 }
