@@ -53,7 +53,11 @@ function displayPokemon(pokemonList) {
 
         // add secondary type
         const secondaryTypeCell = document.createElement('td');
-        secondaryTypeCell.textContent = pokemon.secondary_type;
+        if (pokemon.secondary_type !== "null") {
+            secondaryTypeCell.textContent = pokemon.secondary_type;
+        } else {
+            secondaryTypeCell.textContent = '';
+        }
 
         // Append cells to the row
         row.appendChild(pokedexCell);
@@ -66,8 +70,6 @@ function displayPokemon(pokemonList) {
         row.appendChild(healthCell);
         row.appendChild(primaryTypeCell);
         row.appendChild(secondaryTypeCell);
-
-
 
         // Append row to the table body
         tableBody.appendChild(row);
