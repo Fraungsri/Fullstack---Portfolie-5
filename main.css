@@ -20,11 +20,12 @@ header {
     align-items: center;
     color: white;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Search Section */
 #search-container {
-    margin: 20px;
+    margin: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +41,7 @@ header {
 }
 
 #search {
-    flex: 3;
+    width: 250px; /* Set the desired width */
     padding: 12px;
     font-size: 1rem;
     border-radius: 8px;
@@ -68,7 +69,7 @@ header {
 #pokemon-comparison {
     width: 100%;
     max-width: 90%;
-    margin: 20px auto;
+    margin: 5px auto;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -134,7 +135,7 @@ header {
 
 /* Table Section */
 #pokemon-table-container {
-    margin: 20px;
+    margin: 30px;
     width: 100%;
     overflow-x: auto;
     display: flex;
