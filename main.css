@@ -1,29 +1,35 @@
 /* General styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
+    background-color: lightyellow;
     margin: 0;
     padding: 0;
 }
 
+
 header {
-    background-color: pink;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
+    background-image: url('https://www.impericon.com/cdn/shop/collections/20161101_pokemon_mobile_2x_0e5e6082-2584-43d3-aba2-6f51082fee6a.jpg?v=1720177600');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 250px;
 }
 
-h1 {
-    margin: 0;
+#search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    height: 50px;
 }
 
-header input#search {
-    margin-top: 10px;
+#search {
     padding: 10px;
     width: 50%;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    text-align: center;
 }
 
 /* Table Styles */
@@ -31,6 +37,13 @@ header input#search {
     margin: 20px;
     display: flex;
     justify-content: center;
+}
+
+#pokemon-table {
+    overflow-x: auto; /* Tillad vandret scrolling */
+    overflow-y: hidden; /* Undgå lodret scrolling */
+    width: 100%; /* Sørg for, at tabellen tilpasses */
+    max-width: 1200px; /* Begræns bredden, hvis nødvendigt */
 }
 
 table {
@@ -47,31 +60,13 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-th {
+.pokemon-table th {
     background-color: #0077cc;
     color: white;
 }
 
-td img {
-    width: 50px;
-    height: 50px;
-}
-
 tr:hover {
     background-color: #f1f1f1;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    th, td {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    td img {
-        width: 40px;
-        height: 40px;
-    }
 }
 
 .type-button {
