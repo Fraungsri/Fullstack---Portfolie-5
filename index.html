@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,41 +8,61 @@
 </head>
 <body>
 
-<header id="main-header">
+<header>
 </header>
 
 <section id="search-container">
-    <input type="text" id="search" placeholder="Search Pokémon by Name or Type">
+    <div id="search-bar">
+        <input type="text" id="search" placeholder="Search Pokémon by Name or Type">
+        <button id="show-comparison-btn">Compare Pokémon</button>
+    </div>
 </section>
 
-<!-- Dropdowns to select Pokémon for comparison -->
 <section id="pokemon-comparison">
-    <h2>Compare Pokémon</h2>
-    <label for="pokemon1">Select First Pokémon:</label>
-    <select id="pokemon1"></select>
+    <div id="comparison-header" class="header-bar">
+        <span id="pokemon1-name">Pokémon 1</span>
+        <span id="pokemon-difference">Sammenligning</span>
+        <span id="pokemon2-name">Pokémon 2</span>
+    </div>
 
-    <label for="pokemon2">Select Second Pokémon:</label>
-    <select id="pokemon2"></select>
+    <div id="dropdown-container">
+        <select id="pokemon1">
+            <option value="" disabled selected>Vælg første Pokémon</option>
+        </select>
+        <select id="pokemon2">
+            <option value="" disabled selected>Vælg anden Pokémon</option>
+        </select>
+    </div>
 
-    <!-- Display comparison result -->
-    <div id="comparison-result"></div>
+    <table id="comparison-table">
+        <thead>
+        <tr>
+            <th>Stat</th>
+            <th id="pokemon1-header">Pokémon 1</th>
+            <th id="pokemon2-header">Pokémon 2</th>
+            <th>Forskel</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </section>
 
 <section id="pokemon-table-container">
     <table id="pokemon-table">
         <thead>
         <tr>
-            <th>Image</th>
-            <th>Pokedex Number</th>
-            <th>Name</th>
-            <th>Speed</th>
-            <th>Special Defence</th>
-            <th>Special Attack</th>
-            <th>Defence</th>
-            <th>Attack</th>
-            <th>Health Points</th>
-            <th>Primary Type</th>
-            <th>Secondary Type</th>
+            <th>Billede</th>
+            <th>Pokedex Nummer</th>
+            <th>Navn</th>
+            <th>Fart</th>
+            <th>Special Forsvar</th>
+            <th>Special Angreb</th>
+            <th>Forsvar</th>
+            <th>Angreb</th>
+            <th>Livspoint</th>
+            <th>Primær Type</th>
+            <th>Sekundær Type</th>
         </tr>
         </thead>
         <tbody id="pokemon-table-body"></tbody>

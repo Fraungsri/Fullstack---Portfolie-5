@@ -1,25 +1,24 @@
-// Fetch Pokémon data from the API
+// Hent Pokémon-data fra API
 let allPokemon = [];
 
-// Fetch Pokémon data from the API
+// Fetch Pokémon data
 fetch('http://localhost:3000/pokemon/all')
     .then(response => response.json())
     .then(data => {
-        allPokemon = data; // Save data globally for searching
+        allPokemon = data;
         displayPokemon(allPokemon);
-        populateComparisonDropdowns(allPokemon); // Populate dropdowns for comparison
+        populateComparisonDropdowns(allPokemon);
     })
     .catch(error => console.error('Error fetching data:', error));
 
-// Function to display Pokémon data in a table
+// Funktion til at vise Pokémon-data i en tabel
 function displayPokemon(pokemonList) {
     const tableBody = document.getElementById('pokemon-table-body');
-    tableBody.innerHTML = ''; // Clear the table before adding new rows
+    tableBody.innerHTML = '';
 
     pokemonList.forEach(pokemon => {
         const row = document.createElement('tr');
 
-        // Add image cell
         const imageCell = document.createElement('td');
         const image = document.createElement('img');
         image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokedex_number}.png`;
@@ -27,63 +26,72 @@ function displayPokemon(pokemonList) {
         imageCell.appendChild(image);
         row.appendChild(imageCell);
 
-        // Add Pokedex Number
+        // Pokedex Nummer
         const numberCell = document.createElement('td');
         numberCell.textContent = pokemon.pokedex_number;
         row.appendChild(numberCell);
 
-        // Add Name
+        // Navn
         const nameCell = document.createElement('td');
         nameCell.textContent = pokemon.name;
         row.appendChild(nameCell);
 
-        // Add Speed
+        // Fart
         const speedCell = document.createElement('td');
         speedCell.textContent = pokemon.speed;
         row.appendChild(speedCell);
 
-        // Add Special Defence
+        // Special Forsvar
         const specialDefenceCell = document.createElement('td');
         specialDefenceCell.textContent = pokemon.special_defence;
         row.appendChild(specialDefenceCell);
 
-        // Add Special Attack
+        // Special Angreb
         const specialAttackCell = document.createElement('td');
         specialAttackCell.textContent = pokemon.special_attack;
         row.appendChild(specialAttackCell);
 
-        // Add Defence
+        // Forsvar
         const defenceCell = document.createElement('td');
         defenceCell.textContent = pokemon.defence;
         row.appendChild(defenceCell);
 
-        // Add Attack
+        // Angreb
         const attackCell = document.createElement('td');
         attackCell.textContent = pokemon.attack;
         row.appendChild(attackCell);
 
-        // Add HP
+        // Livspoint
         const hpCell = document.createElement('td');
         hpCell.textContent = pokemon.hp;
         row.appendChild(hpCell);
 
-        // Add Primary Type
+        // Primær Type med knap
         const primaryTypeCell = document.createElement('td');
-        primaryTypeCell.textContent = pokemon.primary_type;
+        const primaryTypeButton = document.createElement('button');
+        primaryTypeButton.textContent = pokemon.primary_type; // Typenavn
+        primaryTypeButton.classList.add('type-button', `type-${pokemon.primary_type.toLowerCase()}`); // Dynamisk typeklasse
+        primaryTypeCell.appendChild(primaryTypeButton); // Tilføj knap til celle
         row.appendChild(primaryTypeCell);
 
-        // Add Secondary Type
+        // Sekundær Type med knap
         const secondaryTypeCell = document.createElement('td');
-        secondaryTypeCell.textContent = pokemon.secondary_type || 'None'; // Handle null/undefined values
+        if (pokemon.secondary_type) {
+            const secondaryTypeButton = document.createElement('button');
+            secondaryTypeButton.textContent = pokemon.secondary_type;
+            secondaryTypeButton.classList.add('type-button', `type-${pokemon.secondary_type.toLowerCase()}`); // Dynamisk typeklasse
+            secondaryTypeCell.appendChild(secondaryTypeButton);
+        } else {
+            secondaryTypeCell.textContent = 'Ingen'; // Fallback for manglende sekundær type
+        }
         row.appendChild(secondaryTypeCell);
 
-        // Append the row to the table body
+        // Tilføj rækken til tabelkroppen
         tableBody.appendChild(row);
     });
-
 }
 
-// Function to populate the dropdowns with Pokémon names
+// Funktion til at udfylde dropdowns med Pokémon-navne
 function populateComparisonDropdowns(pokemonList) {
     const select1 = document.getElementById('pokemon1');
     const select2 = document.getElementById('pokemon2');
@@ -100,50 +108,78 @@ function populateComparisonDropdowns(pokemonList) {
         select2.appendChild(option2);
     });
 
-    // Add event listeners for when the user selects a Pokémon
+    // Tilføj event listeners for når brugeren vælger en Pokémon
     select1.addEventListener('change', comparePokemonStats);
     select2.addEventListener('change', comparePokemonStats);
 }
 
-// Function to compare the stats of two Pokémon
+// Funktion til at sammenligne stats af to Pokémon
 function comparePokemonStats() {
     const pokemon1Id = document.getElementById('pokemon1').value;
     const pokemon2Id = document.getElementById('pokemon2').value;
 
-    // Find the two Pokémon from the list
+    // Find de to Pokémon fra listen
     const pokemon1 = allPokemon.find(p => p.pokedex_number == pokemon1Id);
     const pokemon2 = allPokemon.find(p => p.pokedex_number == pokemon2Id);
 
     if (pokemon1 && pokemon2) {
-        // Compare stats and display results
-        const comparisonResult = document.getElementById('comparison-result');
-        let resultHTML = `
-            <h3>Comparison: ${pokemon1.name} vs ${pokemon2.name}</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Stat</th>
-                        <th>${pokemon1.name}</th>
-                        <th>${pokemon2.name}</th>
-                        <th>Difference</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Attack</td><td>${pokemon1.attack}</td><td>${pokemon2.attack}</td><td>${pokemon1.attack - pokemon2.attack}</td></tr>
-                    <tr><td>Speed</td><td>${pokemon1.speed}</td><td>${pokemon2.speed}</td><td>${pokemon1.speed - pokemon2.speed}</td></tr>
-                    <tr><td>Defense</td><td>${pokemon1.defence}</td><td>${pokemon2.defence}</td><td>${pokemon1.defence - pokemon2.defence}</td></tr>
-                    <tr><td>Special Attack</td><td>${pokemon1.special_attack}</td><td>${pokemon2.special_attack}</td><td>${pokemon1.special_attack - pokemon2.special_attack}</td></tr>
-                    <tr><td>Special Defense</td><td>${pokemon1.special_defence}</td><td>${pokemon2.special_defence}</td><td>${pokemon1.special_defence - pokemon2.special_defence}</td></tr>
-                    <tr><td>HP</td><td>${pokemon1.hp}</td><td>${pokemon2.hp}</td><td>${pokemon1.hp - pokemon2.hp}</td></tr>
-                </tbody>
-            </table>
-        `;
+        // Opdater navne i headeren
+        document.getElementById('pokemon1-name').textContent = pokemon1.name;
+        document.getElementById('pokemon2-name').textContent = pokemon2.name;
 
-        comparisonResult.innerHTML = resultHTML;
+        // Opdater kolonneoverskrifter i tabellen
+        document.getElementById('pokemon1-header').textContent = pokemon1.name;
+        document.getElementById('pokemon2-header').textContent = pokemon2.name;
+
+        // Sammenlign stats og opdater tabellen
+        const stats = ['attack', 'speed', 'defence', 'special_attack', 'special_defence', 'hp'];
+        const statLabels = {
+            'attack': 'Angreb',
+            'speed': 'Fart',
+            'defence': 'Forsvar',
+            'special_attack': 'Special Angreb',
+            'special_defence': 'Special Forsvar',
+            'hp': 'Livspoint'
+        };
+        const tbody = document.querySelector('#comparison-table tbody');
+        tbody.innerHTML = ''; // Ryd tidligere data
+
+        stats.forEach(stat => {
+            const row = document.createElement('tr');
+
+            const statCell = document.createElement('td');
+            statCell.textContent = statLabels[stat];
+            row.appendChild(statCell);
+
+            const pokemon1Cell = document.createElement('td');
+            pokemon1Cell.textContent = pokemon1[stat];
+            row.appendChild(pokemon1Cell);
+
+            const pokemon2Cell = document.createElement('td');
+            pokemon2Cell.textContent = pokemon2[stat];
+            row.appendChild(pokemon2Cell);
+
+            const diffCell = document.createElement('td');
+            const difference = pokemon1[stat] - pokemon2[stat];
+            diffCell.textContent = difference;
+
+            // Tilføj farveindikator for forskellen
+            if (difference > 0) {
+                diffCell.style.color = 'green';
+            } else if (difference < 0) {
+                diffCell.style.color = 'red';
+            } else {
+                diffCell.style.color = 'black';
+            }
+
+            row.appendChild(diffCell);
+
+            tbody.appendChild(row);
+        });
     }
 }
 
-// Search function (unchanged)
+// Søgefunktion
 document.getElementById('search').addEventListener('input', function (e) {
     const searchQuery = e.target.value.toLowerCase();
     const filteredPokemon = allPokemon.filter(pokemon => {
@@ -154,4 +190,16 @@ document.getElementById('search').addEventListener('input', function (e) {
         );
     });
     displayPokemon(filteredPokemon);
+});
+
+// Skjul eller vis sammenligningssektionen
+document.getElementById('show-comparison-btn').addEventListener('click', () => {
+    const comparisonSection = document.getElementById('pokemon-comparison');
+    if (comparisonSection.style.display === 'none' || comparisonSection.style.display === '') {
+        comparisonSection.style.display = 'flex';
+
+        comparisonSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        comparisonSection.style.display = 'none';
+    }
 });
