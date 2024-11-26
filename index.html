@@ -12,6 +12,19 @@
     <input type="text" id="search" placeholder="Search Pokémon by Name or Type">
 </header>
 
+<!-- Dropdowns to select Pokémon for comparison -->
+<section id="pokemon-comparison">
+    <h2>Compare Pokémon</h2>
+    <label for="pokemon1">Select First Pokémon:</label>
+    <select id="pokemon1"></select>
+
+    <label for="pokemon2">Select Second Pokémon:</label>
+    <select id="pokemon2"></select>
+
+    <!-- Display comparison result -->
+    <div id="comparison-result"></div>
+</section>
+
 <section id="pokemon-table-container">
     <table id="pokemon-table">
         <thead>
@@ -34,5 +47,6 @@
 </section>
 
 <script src="main.js" defer></script>
+
 </body>
 </html>

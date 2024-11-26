@@ -164,3 +164,7 @@ tr:hover {
     width: 70px;
     height: 70px;
 }
+
+#pokemon-comparison select {
+    margin: 10px;
+}
