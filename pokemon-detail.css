@@ -106,6 +106,66 @@ th {
     background-color: #a040a0;
 }
 
+.type-badge.water {
+    background-color: #6890f0;
+}
+
+.type-badge.bug {
+    background-color: #a8b820;
+}
+
+.type-badge.fire {
+    background-color: #f08030;
+}
+
+.type-badge.normal {
+    background-color: #a8a878;
+}
+
+.type-badge.flying {
+    background-color: #a890f0;
+}
+
+.type-badge.electric {
+    background-color: #f8d030;
+}
+
+.type-badge.ground {
+    background-color: #e0c068;
+}
+
+.type-badge.fairy {
+    background-color: #ee99ac;
+}
+
+.type-badge.null {
+    background-color: #68a090;
+}
+
+.type-badge.fighting {
+    background-color: #c03028;
+}
+
+.type-badge.psychic {
+    background-color: #f85888;
+}
+
+.type-badge.rock {
+    background-color: #b8a038;
+}
+
+.type-badge.steel {
+    background-color: #b8b8d0;
+}
+
+.type-badge.ice {
+    background-color: #98d8d8;
+}
+
+.type-badge.ghost {
+    background-color: #705898;
+}
+
 #go-back-btn {
     display: inline-block;
     margin: 20px 0;
