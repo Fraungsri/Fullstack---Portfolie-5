@@ -1,7 +1,16 @@
+/* Define color variables for easy maintenance */
+:root {
+    --primary-color: #0077cc;
+    --hover-color: #005fa3;
+    --background-color: lightyellow;
+    --text-color: white;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+/* Basic styles for the body */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: lightyellow;
+    background-color: var(--background-color);
     margin: 0;
     padding: 0;
     display: flex;
@@ -9,21 +18,22 @@ body {
     align-items: center;
 }
 
+/* Styles for the header section */
 header {
     background-image: url('https://www.impericon.com/cdn/shop/collections/20161101_pokemon_mobile_2x_0e5e6082-2584-43d3-aba2-6f51082fee6a.jpg?v=1720177600');
     background-size: cover;
     background-position: center;
-    height: 50vh;
+    height: 45vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: var(--text-color);
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
 }
 
-/* Search Section */
+/* Styles for the search section */
 #search-container {
     margin: 30px;
     display: flex;
@@ -41,7 +51,7 @@ header {
 }
 
 #search {
-    width: 250px; /* Set the desired width */
+    width: 250px;
     padding: 12px;
     font-size: 1rem;
     border-radius: 8px;
@@ -52,31 +62,30 @@ header {
     flex: 1;
     padding: 12px;
     font-size: 1rem;
-    background-color: #0077cc;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     border: none;
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
-    white-space: nowrap
 }
 
 #show-comparison-btn:hover {
-    background-color: #005fa3;
+    background-color: var(--hover-color);
 }
 
-/* Comparison Section */
+/* Styles for the comparison section */
 #pokemon-comparison {
     width: 100%;
     max-width: 90%;
     margin: 5px auto;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: white;
+    box-shadow: var(--box-shadow);
+    background-color: var(--text-color);
     overflow-x: auto;
     padding: 0;
-    display: none;
+    display: none; /* Hidden by default */
     flex-direction: column;
     align-items: center;
 }
@@ -85,8 +94,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0077cc;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     padding: 10px 20px;
     border-radius: 10px 10px 0 0;
     font-weight: bold;
@@ -111,31 +120,32 @@ header {
     background-color: #f9f9f9;
 }
 
-#comparison-table {
+/* Common table styles */
+table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
+    background-color: var(--text-color);
     margin: 0 auto;
 }
 
-#comparison-table th, #comparison-table td {
+th, td {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
-#comparison-table th {
-    background-color: #0077cc;
-    color: white;
+th {
+    background-color: var(--primary-color);
+    color: var(--text-color);
 }
 
-#comparison-table tr:hover {
+tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Table Section */
+/* Specific table styles */
 #pokemon-table-container {
-    margin: 30px;
+    margin: 5px;
     width: 100%;
     overflow-x: auto;
     display: flex;
@@ -143,75 +153,67 @@ header {
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     max-width: 90%;
 }
 
 #pokemon-table {
-    width: 100%;
     min-width: 800px;
-    border-collapse: collapse;
-    background-color: white;
-    margin: 0 auto;
 }
 
-#pokemon-table th, #pokemon-table td {
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+#pokemon-table a {
+    color: inherit;
+    text-decoration: none;
 }
 
-#pokemon-table th {
-    background-color: #0077cc;
-    color: white;
-}
-
-#pokemon-table tr:hover {
-    background-color: #f1f1f1;
+#pokemon-table a:hover {
+    text-decoration: underline;
+    color: #007BFF;
 }
 
 #pokemon-table img {
-    border: none;
     display: block;
     margin: 0 auto;
     width: 70px;
     height: 70px;
 }
 
-/* Type Buttons */
+/* Styles for type buttons */
 .type-button {
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 1em;
-    color: white;
+    color: black;
     text-transform: uppercase;
     pointer-events: none;
     cursor: default;
 }
 
-.type-grass { background-color: #78C850; color: black; }
-.type-poison { background-color: #A040A0; color: black; }
-.type-fire { background-color: #F08030; color: black; }
-.type-water { background-color: #6890F0; color: black; }
-.type-electric { background-color: #F8D030; color: black; }
-.type-ice { background-color: #98D8D8; color: black; }
-.type-psychic { background-color: #F85888; color: black; }
-.type-rock { background-color: #B8A038; color: black; }
-.type-fighting { background-color: #C03028; color: black; }
-.type-flying { background-color: #A890F0; color: black; }
-.type-ground { background-color: #E0C068; color: black; }
-.type-bug { background-color: #A8B820; color: black; }
-.type-normal { background-color: #A8A878; color: black; }
-.type-ghost { background-color: #705898; color: black; }
-.type-fairy { background-color: #EE99AC; color: black; }
-.type-steel { background-color: #B8B8D0; color: black; }
-.type-dragon { background-color: #7038F8; color: black; }
-.type-dark { background-color: #705848; color: black; }
-.type-null { background-color: #68A090; color: black; }
+/* Type-specific background colors */
+.type-grass { background-color: #78C850; }
+.type-poison { background-color: #A040A0; }
+.type-fire { background-color: #F08030; }
+.type-water { background-color: #6890F0; }
+.type-electric { background-color: #F8D030; }
+.type-ice { background-color: #98D8D8; }
+.type-psychic { background-color: #F85888; }
+.type-rock { background-color: #B8A038; }
+.type-fighting { background-color: #C03028; }
+.type-flying { background-color: #A890F0; }
+.type-ground { background-color: #E0C068; }
+.type-bug { background-color: #A8B820; }
+.type-normal { background-color: #A8A878; }
+.type-ghost { background-color: #705898; }
+.type-fairy { background-color: #EE99AC; }
+.type-steel { background-color: #B8B8D0; }
+.type-dragon { background-color: #7038F8; }
+.type-dark { background-color: #705848; }
+.type-null { background-color: #68A090; }
 
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
+/* Responsive styles */
+@media (max-width: 768px) {
+    /* Hide certain columns on smaller screens */
     #pokemon-table th:nth-child(4), #pokemon-table td:nth-child(4),
     #pokemon-table th:nth-child(5), #pokemon-table td:nth-child(5),
     #pokemon-table th:nth-child(6), #pokemon-table td:nth-child(6),
@@ -230,8 +232,8 @@ header {
     }
 }
 
-@media screen and (max-width: 480px) {
-
+@media (max-width: 480px) {
+    /* Adjust font size and layout for very small screens */
     body {
         font-size: 14px;
     }
