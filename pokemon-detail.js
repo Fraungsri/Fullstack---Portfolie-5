@@ -47,3 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.innerHTML = `<h1>Error: ${error.message}</h1>`;
         });
 });
+
+document.getElementById('go-back-btn').addEventListener('click', () => {
+    window.location.href = 'index.html'; // Replace with your desired URL
+});

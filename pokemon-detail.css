@@ -106,3 +106,21 @@ th {
     background-color: #a040a0;
 }
 
+#go-back-btn {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff; /* Blue button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+#go-back-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
