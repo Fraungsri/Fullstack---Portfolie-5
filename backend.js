@@ -28,3 +28,20 @@ app.get('/pokemon/all',(req, res)=>{
         res.send(results);
     });
 });
+
+app.get('/pokemon/:id', (req, res) => {
+    const pokemonId = req.params.id;
+    connection.query(
+        'SELECT * FROM pokemon WHERE pokedex_number = ?',
+        [pokemonId],
+        (error, results) => {
+            if (error) {
+                res.status(500).send("Database error");
+            } else if (results.length === 0) {
+                res.status(404).send("Pokémon not found");
+            } else {
+                res.send(results[0]); // Sends the specific Pokémon data
+            }
+        }
+    );
+});

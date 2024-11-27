@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: lightyellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#content-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 900px;
+    width: 90%;
+}
+
+/* Header Section */
+header h1 {
+    font-size: 2.5rem;
+    margin: 0 0 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+header h1 span {
+    font-size: 1.5rem;
+    color: gray;
+    font-weight: normal;
+}
+
+/* Main Content Layout */
+#pokemon-details {
+    display: flex;
+    flex-wrap: wrap; /* Makes layout responsive */
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* Image Section */
+#image-container {
+    flex: 1 1 40%; /* Adjusts image size dynamically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pokemon-image {
+    width: 250px;
+    height: 250px;
+    object-fit: contain; /* Keeps proportions */
+    border: 1px solid #ddd; /* Optional border */
+    border-radius: 10px;
+    background-color: #f9f9f9; /* Optional background */
+    padding: 10px;
+}
+
+/* Stats Section */
+#stats-container {
+    flex: 1 1 55%; /* Adjusts stats size dynamically */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px; /* Add spacing below */
+    font-size: 1.2rem;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Type Badges */
+#type-container {
+    display: flex;
+    gap: 10px;
+}
+
+.type-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+/* Type Colors */
+.type-badge.grass {
+    background-color: #78c850;
+}
+
+.type-badge.poison {
+    background-color: #a040a0;
+}
+
