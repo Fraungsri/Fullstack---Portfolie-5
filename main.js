@@ -19,6 +19,7 @@ function displayPokemon(pokemonList) {
     pokemonList.forEach(pokemon => {
         const row = document.createElement('tr');
 
+
         const imageCell = document.createElement('td');
         const image = document.createElement('img');
         image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokedex_number}.png`;
@@ -31,9 +32,12 @@ function displayPokemon(pokemonList) {
         numberCell.textContent = pokemon.pokedex_number;
         row.appendChild(numberCell);
 
-        // Navn
+        // Navn + når navnene klikkes, så bliver man sendt til en på api endpoint som er (/pokemon/:id)
         const nameCell = document.createElement('td');
-        nameCell.textContent = pokemon.name;
+        const nameLink = document.createElement('a');
+        nameLink.href = `pokemon-detail.html?id=${pokemon.pokedex_number}`; // Dynamic link
+        nameLink.textContent = pokemon.name;
+        nameCell.appendChild(nameLink);
         row.appendChild(nameCell);
 
         // Fart
@@ -195,6 +199,7 @@ document.getElementById('search').addEventListener('input', function (e) {
 // Skjul eller vis sammenligningssektionen
 document.getElementById('show-comparison-btn').addEventListener('click', () => {
     const comparisonSection = document.getElementById('pokemon-comparison');
+    comparisonSection.style.transition = 'all 0.3s ease';
     if (comparisonSection.style.display === 'none' || comparisonSection.style.display === '') {
         comparisonSection.style.display = 'flex';
 
@@ -203,3 +208,5 @@ document.getElementById('show-comparison-btn').addEventListener('click', () => {
         comparisonSection.style.display = 'none';
     }
 });
+
+d

@@ -1,4 +1,4 @@
-/* General styles */
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: lightyellow;
@@ -231,6 +231,7 @@ header {
 }
 
 @media screen and (max-width: 480px) {
+
     body {
         font-size: 14px;
     }
