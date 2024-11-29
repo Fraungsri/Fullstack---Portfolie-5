@@ -1,89 +1,99 @@
-// Fetch Pokémon data from the API
+// Initialize an array to store all Pokémon data
 let allPokemon = [];
 
-// Fetch Pokémon data from the API
-fetch('http://localhost:3000/pokemon/all')
-    .then(response => response.json())
-    .then(data => {
-        allPokemon = data; // Save data globally for searching
+// Asynchronous function to fetch Pokémon data from the API
+async function fetchPokemonData() {
+    try {
+        const response = await fetch('http://localhost:3000/pokemon/all');
+        allPokemon = await response.json();
         displayPokemon(allPokemon);
-        populateComparisonDropdowns(allPokemon); // Populate dropdowns for comparison
-    })
-    .catch(error => console.error('Error fetching data:', error));
+        populateComparisonDropdowns(allPokemon);
+        addEventListeners();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
 
-// Function to display Pokémon data in a table
+fetchPokemonData();
+
+// Function to display Pokémon data in the table
 function displayPokemon(pokemonList) {
     const tableBody = document.getElementById('pokemon-table-body');
-    tableBody.innerHTML = ''; // Clear the table before adding new rows
+    tableBody.innerHTML = '';
 
     pokemonList.forEach(pokemon => {
         const row = document.createElement('tr');
 
-        // Add image cell
-        const imageCell = document.createElement('td');
-        const image = document.createElement('img');
-        image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokedex_number}.png`;
-        image.alt = pokemon.name;
-        imageCell.appendChild(image);
-        row.appendChild(imageCell);
+        // Create table cells for each Pokémon attribute
+        createImageCell(pokemon, row);
+        createTextCell(pokemon.pokedex_number || 'N/A', row);
+        createNameCell(pokemon, row);
+        createTextCell(pokemon.speed || 'N/A', row);
+        createTextCell(pokemon.special_defence || 'N/A', row);
+        createTextCell(pokemon.special_attack || 'N/A', row);
+        createTextCell(pokemon.defence || 'N/A', row);
+        createTextCell(pokemon.attack || 'N/A', row);
+        createTextCell(pokemon.hp || 'N/A', row);
+        createTypeCell(pokemon.primary_type || 'Unknown', row);
+        createSecondaryTypeCell(pokemon.secondary_type, row);
 
-        // Add Pokedex Number
-        const numberCell = document.createElement('td');
-        numberCell.textContent = pokemon.pokedex_number;
-        row.appendChild(numberCell);
-
-        // Add Name
-        const nameCell = document.createElement('td');
-        nameCell.textContent = pokemon.name;
-        row.appendChild(nameCell);
-
-        // Add Speed
-        const speedCell = document.createElement('td');
-        speedCell.textContent = pokemon.speed;
-        row.appendChild(speedCell);
-
-        // Add Special Defence
-        const specialDefenceCell = document.createElement('td');
-        specialDefenceCell.textContent = pokemon.special_defence;
-        row.appendChild(specialDefenceCell);
-
-        // Add Special Attack
-        const specialAttackCell = document.createElement('td');
-        specialAttackCell.textContent = pokemon.special_attack;
-        row.appendChild(specialAttackCell);
-
-        // Add Defence
-        const defenceCell = document.createElement('td');
-        defenceCell.textContent = pokemon.defence;
-        row.appendChild(defenceCell);
-
-        // Add Attack
-        const attackCell = document.createElement('td');
-        attackCell.textContent = pokemon.attack;
-        row.appendChild(attackCell);
-
-        // Add HP
-        const hpCell = document.createElement('td');
-        hpCell.textContent = pokemon.hp;
-        row.appendChild(hpCell);
-
-        // Add Primary Type
-        const primaryTypeCell = document.createElement('td');
-        primaryTypeCell.textContent = pokemon.primary_type;
-        row.appendChild(primaryTypeCell);
-
-        // Add Secondary Type
-        const secondaryTypeCell = document.createElement('td');
-        secondaryTypeCell.textContent = pokemon.secondary_type || 'None'; // Handle null/undefined values
-        row.appendChild(secondaryTypeCell);
-
-        // Append the row to the table body
+        // Add the row to the table body
         tableBody.appendChild(row);
     });
-
 }
 
-// Function to populate the dropdowns with Pokémon names
+// Helper function to create a text cell
+function createTextCell(content, row) {
+    const cell = document.createElement('td');
+    cell.textContent = content;
+    row.appendChild(cell);
+}
+
+// Helper function to create an image cell
+function createImageCell(pokemon, row) {
+    const cell = document.createElement('td');
+    const image = document.createElement('img');
+    image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokedex_number}.png`;
+    image.alt = pokemon.name;
+    cell.appendChild(image);
+    row.appendChild(cell);
+}
+
+// Helper function to create a name cell with a link
+function createNameCell(pokemon, row) {
+    const cell = document.createElement('td');
+    const link = document.createElement('a');
+    link.href = `pokemon-detail.html?id=${pokemon.pokedex_number}`;
+    link.textContent = pokemon.name || 'Unknown';
+    cell.appendChild(link);
+    row.appendChild(cell);
+}
+
+// Helper function to create a type cell
+function createTypeCell(type, row) {
+    const cell = document.createElement('td');
+    const button = document.createElement('button');
+    button.textContent = type;
+    button.classList.add('type-button', `type-${type.toLowerCase()}`);
+    cell.appendChild(button);
+    row.appendChild(cell);
+}
+
+// Helper function to create a secondary type cell
+function createSecondaryTypeCell(type, row) {
+    const cell = document.createElement('td');
+    if (type) {
+        const button = document.createElement('button');
+        button.textContent = type;
+        button.classList.add('type-button', `type-${type.toLowerCase()}`);
+        cell.appendChild(button);
+    } else {
+        cell.textContent = 'None';
+    }
+    row.appendChild(cell);
+}
+
+// Function to populate the comparison dropdowns with Pokémon names
 function populateComparisonDropdowns(pokemonList) {
     const select1 = document.getElementById('pokemon1');
     const select2 = document.getElementById('pokemon2');
@@ -99,52 +109,68 @@ function populateComparisonDropdowns(pokemonList) {
         option2.textContent = pokemon.name;
         select2.appendChild(option2);
     });
-
-    // Add event listeners for when the user selects a Pokémon
-    select1.addEventListener('change', comparePokemonStats);
-    select2.addEventListener('change', comparePokemonStats);
 }
 
-// Function to compare the stats of two Pokémon
+// Function to compare stats between two selected Pokémon
 function comparePokemonStats() {
-    const pokemon1Id = document.getElementById('pokemon1').value;
-    const pokemon2Id = document.getElementById('pokemon2').value;
+    const select1 = document.getElementById('pokemon1');
+    const select2 = document.getElementById('pokemon2');
 
-    // Find the two Pokémon from the list
-    const pokemon1 = allPokemon.find(p => p.pokedex_number == pokemon1Id);
-    const pokemon2 = allPokemon.find(p => p.pokedex_number == pokemon2Id);
+    // Ensure both Pokémon are selected
+    if (!select1.value || !select2.value) return;
+
+    const pokemon1Id = parseInt(select1.value, 10);
+    const pokemon2Id = parseInt(select2.value, 10);
+
+    const pokemon1 = allPokemon.find(p => p.pokedex_number === pokemon1Id);
+    const pokemon2 = allPokemon.find(p => p.pokedex_number === pokemon2Id);
 
     if (pokemon1 && pokemon2) {
-        // Compare stats and display results
-        const comparisonResult = document.getElementById('comparison-result');
-        let resultHTML = `
-            <h3>Comparison: ${pokemon1.name} vs ${pokemon2.name}</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Stat</th>
-                        <th>${pokemon1.name}</th>
-                        <th>${pokemon2.name}</th>
-                        <th>Difference</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Attack</td><td>${pokemon1.attack}</td><td>${pokemon2.attack}</td><td>${pokemon1.attack - pokemon2.attack}</td></tr>
-                    <tr><td>Speed</td><td>${pokemon1.speed}</td><td>${pokemon2.speed}</td><td>${pokemon1.speed - pokemon2.speed}</td></tr>
-                    <tr><td>Defense</td><td>${pokemon1.defence}</td><td>${pokemon2.defence}</td><td>${pokemon1.defence - pokemon2.defence}</td></tr>
-                    <tr><td>Special Attack</td><td>${pokemon1.special_attack}</td><td>${pokemon2.special_attack}</td><td>${pokemon1.special_attack - pokemon2.special_attack}</td></tr>
-                    <tr><td>Special Defense</td><td>${pokemon1.special_defence}</td><td>${pokemon2.special_defence}</td><td>${pokemon1.special_defence - pokemon2.special_defence}</td></tr>
-                    <tr><td>HP</td><td>${pokemon1.hp}</td><td>${pokemon2.hp}</td><td>${pokemon1.hp - pokemon2.hp}</td></tr>
-                </tbody>
-            </table>
-        `;
+        // Update headers with Pokémon names
+        document.getElementById('pokemon1-name').textContent = pokemon1.name;
+        document.getElementById('pokemon2-name').textContent = pokemon2.name;
 
-        comparisonResult.innerHTML = resultHTML;
+        document.getElementById('pokemon1-header').textContent = pokemon1.name;
+        document.getElementById('pokemon2-header').textContent = pokemon2.name;
+
+        const stats = ['attack', 'speed', 'defence', 'special_attack', 'special_defence', 'hp'];
+        const statLabels = {
+            'attack': 'Attack',
+            'speed': 'Speed',
+            'defence': 'Defense',
+            'special_attack': 'Special Attack',
+            'special_defence': 'Special Defense',
+            'hp': 'HP'
+        };
+
+        const tbody = document.querySelector('#comparison-table tbody');
+        tbody.innerHTML = '';
+
+        stats.forEach(stat => {
+            const row = document.createElement('tr');
+
+            createTextCell(statLabels[stat], row);
+            createTextCell(pokemon1[stat] || 'N/A', row);
+            createTextCell(pokemon2[stat] || 'N/A', row);
+
+            // Calculate and display the difference
+            const diffCell = document.createElement('td');
+            const difference = (pokemon1[stat] || 0) - (pokemon2[stat] || 0);
+            diffCell.textContent = difference;
+
+            // Color code the difference
+            if (difference > 0) diffCell.style.color = 'green';
+            else if (difference < 0) diffCell.style.color = 'red';
+            else diffCell.style.color = 'black';
+
+            row.appendChild(diffCell);
+            tbody.appendChild(row);
+        });
     }
 }
 
-// Search function (unchanged)
-document.getElementById('search').addEventListener('input', function (e) {
+// Search function to filter Pokémon based on input
+function handleSearch(e) {
     const searchQuery = e.target.value.toLowerCase();
     const filteredPokemon = allPokemon.filter(pokemon => {
         return (
@@ -154,4 +180,26 @@ document.getElementById('search').addEventListener('input', function (e) {
         );
     });
     displayPokemon(filteredPokemon);
-});
+}
+
+// Function to add event listeners
+function addEventListeners() {
+    // Event listener for the search input
+    document.getElementById('search').addEventListener('input', handleSearch);
+
+    // Event listener for the comparison button
+    document.getElementById('show-comparison-btn').addEventListener('click', () => {
+        const comparisonSection = document.getElementById('pokemon-comparison');
+        comparisonSection.style.transition = 'all 0.3s ease';
+        if (comparisonSection.style.display === 'none' || comparisonSection.style.display === '') {
+            comparisonSection.style.display = 'flex';
+            comparisonSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            comparisonSection.style.display = 'none';
+        }
+    });
+
+    // Event listeners for the comparison dropdowns
+    document.getElementById('pokemon1').addEventListener('change', comparePokemonStats);
+    document.getElementById('pokemon2').addEventListener('change', comparePokemonStats);
+}

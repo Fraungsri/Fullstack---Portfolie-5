@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Details</title>
+    <link rel="stylesheet" href="pokemon-detail.css">
+</head>
+<body>
+<div id="content-container">
+    <!-- Header Section -->
+    <header>
+        <h1 id="pokemon-name"></span></h1>
+    </header>
+
+    <!-- Main Content Section -->
+    <main id="pokemon-details">
+        <div id="image-container">
+            <img id="pokemon-image" alt="Pokémon Image">
+        </div>
+        <div id="stats-container">
+            <table>
+                <tr><th>Pokedex Number</th><td id="pokedex-number"></td></tr>
+                <tr><th>HP</th><td id="hp"></td></tr>
+                <tr><th>Attack</th><td id="attack"></td></tr>
+                <tr><th>Defense</th><td id="defense"></td></tr>
+                <tr><th>Speed</th><td id="speed"></td></tr>
+                <tr><th>Special Attack</th><td id="special-attack"></td></tr>
+                <tr><th>Special Defense</th><td id="special-defense"></td></tr>
+            </table>
+            <div id="type-container">
+                <span class="type-badge grass">Grass</span>
+                <span class="type-badge poison">Poison</span>
+                <span class="type-badge water">Water</span>
+                <span class="type-badge bug">Bug</span>
+                <span class="type-badge fire">Fire</span>
+                <span class="type-badge normal">Normal</span>
+                <span class="type-badge flying">Flying</span>
+                <span class="type-badge electric">Electric</span>
+                <span class="type-badge ground">Ground</span>
+                <span class="type-badge fairy">Fairy</span>
+                <span class="type-badge null">Null</span>
+                <span class="type-badge fighting">Fighting</span>
+                <span class="type-badge psychic">Psychic</span>
+                <span class="type-badge rock">Rock</span>
+                <span class="type-badge steel">Steel</span>
+                <span class="type-badge ice">Ice</span>
+                <span class="type-badge ghost">Ghost</span>
+
+
+            </div>
+        </div>
+    </main>
+
+    <button id="go-back-btn">Go Back</button>
+</div>
+<script src="pokemon-detail.js" defer></script>
+<script src="main.js" defer></script>
+
+</body>
+</html>
