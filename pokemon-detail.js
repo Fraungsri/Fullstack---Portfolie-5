@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Fetch Pokémon details
+    // Fetching pokemon details
     fetch(`http://localhost:3000/pokemon/${pokemonId}`)
         .then(response => response.json())
         .then(pokemon => {
@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
+
+// go back to front page button
 document.getElementById('go-back-btn').addEventListener('click', () => {
-    window.location.href = 'index.html'; // Replace with your desired URL
+    window.location.href = 'index.html';
 });
+

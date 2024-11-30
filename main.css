@@ -58,7 +58,7 @@ header {
     border: 1px solid #ddd;
 }
 
-#show-comparison-btn {
+#compare-btn {
     flex: 1;
     padding: 12px;
     font-size: 1rem;
@@ -70,8 +70,12 @@ header {
     text-align: center;
 }
 
-#show-comparison-btn:hover {
+#compare-btn:hover {
     background-color: var(--hover-color);
+}
+
+.bold-text {
+    font-weight: bold;
 }
 
 /* Styles for the comparison section */

@@ -36,11 +36,11 @@ app.get('/pokemon/:id', (req, res) => {
         [pokemonId],
         (error, results) => {
             if (error) {
-                res.status(500).send("Database error");
+                res.status(500).send("error");
             } else if (results.length === 0) {
                 res.status(404).send("Pokémon not found");
             } else {
-                res.send(results[0]); // Sends the specific Pokémon data
+                res.send(results[0]); // Sends the specific Pokemon data
             }
         }
     );
