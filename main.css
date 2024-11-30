@@ -258,9 +258,20 @@ tr:hover {
     }
 }
 
-table th[data-attribute] {
-    position: relative;
+th[data-attribute] p {
+    display: inline-block;
 }
+
+th[data-attribute]::after {
+    content: "▲\A▼";
+    font-size: 0.8em;
+    color: #555;
+    white-space: pre; /* Ensures the line break is respected */
+    display: inline-block; /* Makes pseudo-element block-level for better spacing */
+    text-align: center; /* Centers the arrows vertically */
+    margin-left: 0.4em;
+}
+
 
 table th[data-attribute].ascending::after {
     content: " ▲";
