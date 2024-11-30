@@ -9,12 +9,7 @@
 <body>
 
 <header>
-  <h1>Compare Pokémon</h1>
 </header>
-
-<section id="comparison-container">
-  <p>Select two Pokémon to compare their stats.</p>
-</section>
 
 <section id="pokemon-comparison">
   <div id="comparison-header" class="header-bar">
@@ -30,14 +25,23 @@
     <select id="pokemon2">
       <option value="" disabled selected>Select second Pokémon</option>
     </select>
+    <button id="compare-btn" class="btn">Compare</button>
   </div>
 
-  <table id="comparison-table">
+  <table id="comparison-table" style="display: none;">
     <thead>
     <tr>
       <th>Stats</th>
-      <th id="pokemon1-header">Pokémon 1</th>
-      <th id="pokemon2-header">Pokémon 2</th>
+      <th id="pokemon1-header">
+        <div class="pokemon-image-container">
+          <img id="pokemon1Image" alt="Pokémon 1 Image" src="">
+        </div>
+      </th>
+      <th id="pokemon2-header">
+        <div class="pokemon-image-container">
+          <img id="pokemon2Image" alt="Pokémon 2 Image" src="">
+        </div>
+      </th>
       <th>Difference</th>
     </tr>
     </thead>

@@ -10,8 +10,17 @@ body {
 }
 
 header {
-    text-align: center;
-    margin: 20px;
+    background-image: url('https://www.impericon.com/cdn/shop/collections/20161101_pokemon_mobile_2x_0e5e6082-2584-43d3-aba2-6f51082fee6a.jpg?v=1720177600');
+    background-size: cover;
+    background-position: center;
+    height: 45vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    box-shadow: var(--box-shadow);
 }
 
 #pokemon-comparison {
@@ -44,18 +53,33 @@ header {
 #dropdown-container {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 20px 0;
     width: 100%;
     max-width: 90%;
+    gap: 10px;
 }
 
 #dropdown-container select {
     flex: 1;
-    margin: 0 10px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
     background-color: #f9f9f9;
+}
+
+#compare-btn {
+    padding: 10px 20px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#compare-btn:hover {
+    background-color: #005fa3;
 }
 
 table {
@@ -69,6 +93,15 @@ th, td {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #ddd;
+}
+
+th img {
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
 th {
