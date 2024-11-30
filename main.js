@@ -13,7 +13,9 @@ async function fetchPokemonData() {
     }
 }
 
-// Display Pokémon in the table
+fetchPokemonData();
+
+// Function to display Pokémon data in the table
 function displayPokemon(pokemonList) {
     const tableBody = document.getElementById('pokemon-table-body');
     tableBody.innerHTML = '';
@@ -68,13 +70,13 @@ function createNameCell(pokemon, row) {
 // Create a type cell with styling
 function createTypeCell(type, row) {
     const cell = document.createElement('td');
-    if (type !== 'Unknown') {
+    if (type !== 'null' && type !== null) {
         const typeButton = document.createElement('span');
         typeButton.textContent = type;
         typeButton.className = `type-button type-${type.toLowerCase()}`;
         cell.appendChild(typeButton);
     } else {
-        cell.textContent = type;
+        cell.textContent = '';
     }
     row.appendChild(cell);
 }
@@ -93,24 +95,61 @@ function addSearchListener() {
     });
 }
 
-// Add sorting functionality
+// Function to sort and display the Pokémon table
+let currentSort = { attribute: null, ascending: true };
+
+function handleSort(event) {
+    const attribute = event.target.getAttribute('data-attribute');
+
+    if (!attribute) return;
+
+    // Toggle sorting order
+    if (currentSort.attribute === attribute) {
+        currentSort.ascending = !currentSort.ascending;
+    } else {
+        currentSort.attribute = attribute;
+        currentSort.ascending = true;
+    }
+
+    // Remove the ascending and descending classes from all headers
+    const headers = document.querySelectorAll('#pokemon-table th[data-attribute]');
+    headers.forEach(header => {
+        header.classList.remove('ascending', 'descending');
+    });
+
+    // Add the appropriate class to the clicked header
+    const clickedHeader = event.target;
+    if (currentSort.ascending) {
+        clickedHeader.classList.add('ascending');
+    } else {
+        clickedHeader.classList.add('descending');
+    }
+
+    // Sort the Pokémon array
+    allPokemon.sort((a, b) => {
+        let valA = a[attribute] || ''; // Use an empty string for undefined/null values
+        let valB = b[attribute] || '';
+
+        // Convert to lowercase for case-insensitive sorting (for text fields like name or type)
+        if (typeof valA === 'string') valA = valA.toLowerCase();
+        if (typeof valB === 'string') valB = valB.toLowerCase();
+
+        if (valA < valB) return currentSort.ascending ? -1 : 1;
+        if (valA > valB) return currentSort.ascending ? 1 : -1;
+        return 0;
+    });
+
+    // Re-render the table
+    displayPokemon(allPokemon);
+}
+
+
+// Add sorting event listeners to table headers
 function addSortingListeners() {
     const headers = document.querySelectorAll('#pokemon-table th[data-attribute]');
     headers.forEach(header => {
-        header.addEventListener('click', () => {
-            const attribute = header.getAttribute('data-attribute');
-            const isAscending = header.classList.contains('ascending');
-            headers.forEach(h => h.classList.remove('ascending', 'descending'));
-            header.classList.toggle(isAscending ? 'descending' : 'ascending');
-
-            allPokemon.sort((a, b) => {
-                if (a[attribute] > b[attribute]) return isAscending ? -1 : 1;
-                if (a[attribute] < b[attribute]) return isAscending ? 1 : -1;
-                return 0;
-            });
-
-            displayPokemon(allPokemon);
-        });
+        header.style.cursor = 'pointer'; // Make headers look clickable
+        header.addEventListener('click', handleSort);
     });
 }
 

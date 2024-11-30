@@ -257,15 +257,31 @@ tr:hover {
         max-width: none;
     }
 }
-
-table th[data-attribute] {
+table {
     position: relative;
 }
+
+table th[data-attribute] p {
+    display: inline-block;
+}
+
+table th[data-attribute]::after {
+    content: "▲\A▼";
+    font-size: 0.8em;
+    color: #555;
+    white-space: pre; /* Ensures the line break is respected */
+    display: inline-block; /* Makes pseudo-element block-level for better spacing */
+    margin-left: 0.4em;
+    position: relative;
+    top: 0.5em;
+}
+
 
 table th[data-attribute].ascending::after {
     content: " ▲";
     font-size: 0.8em;
     color: #555;
+    top: -0.6em;
 }
 
 table th[data-attribute].descending::after {
