@@ -82,13 +82,13 @@ function createTypeCell(type, row) {
 // Helper function to create a secondary type cell
 function createSecondaryTypeCell(type, row) {
     const cell = document.createElement('td');
-    if (type) {
+    if (type !== 'null' && type !== null) {
         const button = document.createElement('button');
         button.textContent = type;
         button.classList.add('type-button', `type-${type.toLowerCase()}`);
         cell.appendChild(button);
     } else {
-        cell.textContent = 'None';
+        cell.textContent = '';
     }
     row.appendChild(cell);
 }
