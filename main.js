@@ -111,64 +111,6 @@ function populateComparisonDropdowns(pokemonList) {
     });
 }
 
-// Function to compare stats between two selected Pokémon
-function comparePokemonStats() {
-    const select1 = document.getElementById('pokemon1');
-    const select2 = document.getElementById('pokemon2');
-
-    // Ensure both Pokémon are selected
-    if (!select1.value || !select2.value) return;
-
-    const pokemon1Id = parseInt(select1.value, 10);
-    const pokemon2Id = parseInt(select2.value, 10);
-
-    const pokemon1 = allPokemon.find(p => p.pokedex_number === pokemon1Id);
-    const pokemon2 = allPokemon.find(p => p.pokedex_number === pokemon2Id);
-
-    if (pokemon1 && pokemon2) {
-        // Update headers with Pokémon names
-        document.getElementById('pokemon1-name').textContent = pokemon1.name;
-        document.getElementById('pokemon2-name').textContent = pokemon2.name;
-
-        document.getElementById('pokemon1-header').textContent = pokemon1.name;
-        document.getElementById('pokemon2-header').textContent = pokemon2.name;
-
-        const stats = ['attack', 'speed', 'defence', 'special_attack', 'special_defence', 'hp'];
-        const statLabels = {
-            'attack': 'Attack',
-            'speed': 'Speed',
-            'defence': 'Defense',
-            'special_attack': 'Special Attack',
-            'special_defence': 'Special Defense',
-            'hp': 'HP'
-        };
-
-        const tbody = document.querySelector('#comparison-table tbody');
-        tbody.innerHTML = '';
-
-        stats.forEach(stat => {
-            const row = document.createElement('tr');
-
-            createTextCell(statLabels[stat], row);
-            createTextCell(pokemon1[stat] || 'N/A', row);
-            createTextCell(pokemon2[stat] || 'N/A', row);
-
-            // Calculate and display the difference
-            const diffCell = document.createElement('td');
-            const difference = (pokemon1[stat] || 0) - (pokemon2[stat] || 0);
-            diffCell.textContent = difference;
-
-            // Color code the difference
-            if (difference > 0) diffCell.style.color = 'green';
-            else if (difference < 0) diffCell.style.color = 'red';
-            else diffCell.style.color = 'black';
-
-            row.appendChild(diffCell);
-            tbody.appendChild(row);
-        });
-    }
-}
-
 // Search function to filter Pokémon based on input
 function handleSearch(e) {
     const searchQuery = e.target.value.toLowerCase();
@@ -257,4 +199,3 @@ function addEventListeners() {
 
     addSortingListeners();
 }
-

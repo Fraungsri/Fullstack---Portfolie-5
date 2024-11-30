@@ -74,52 +74,6 @@ header {
     background-color: var(--hover-color);
 }
 
-/* Styles for the comparison section */
-#pokemon-comparison {
-    width: 100%;
-    max-width: 90%;
-    margin: 5px auto;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    background-color: var(--text-color);
-    overflow-x: auto;
-    padding: 0;
-    display: none; /* Hidden by default */
-    flex-direction: column;
-    align-items: center;
-}
-
-.header-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 10px 20px;
-    border-radius: 10px 10px 0 0;
-    font-weight: bold;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-#dropdown-container {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    width: 100%;
-    max-width: 90%;
-}
-
-#dropdown-container select {
-    flex: 1;
-    margin: 0 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-}
-
 /* Common table styles */
 table {
     width: 100%;
@@ -230,42 +184,4 @@ tr:hover {
     #search, #show-comparison-btn {
         width: 90%;
     }
-}
-
-@media (max-width: 480px) {
-    /* Adjust font size and layout for very small screens */
-    body {
-        font-size: 14px;
-    }
-
-    #pokemon-comparison {
-        margin: 10px;
-        padding: 15px;
-    }
-
-    #search-bar {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    #search, #show-comparison-btn {
-        width: 100%;
-        max-width: none;
-    }
-}
-
-table th[data-attribute] {
-    position: relative;
-}
-
-table th[data-attribute].ascending::after {
-    content: " ▲";
-    font-size: 0.8em;
-    color: #555;
-}
-
-table th[data-attribute].descending::after {
-    content: " ▼";
-    font-size: 0.8em;
-    color: #555;
 }
