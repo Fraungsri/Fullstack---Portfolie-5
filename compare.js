@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialiser dropdown-menuerne
+    // Initialize dropdown menus
     populateDropdowns();
 
     document.getElementById('compare-btn').addEventListener('click', () => {
@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Function to fetch Pokémon data and populate dropdown menus
 async function populateDropdowns() {
     try {
-        const response = await fetch('http://localhost:3000/pokemon/all');
+        const response = await fetch('http://localhost:3000/pokemon/all'); // Update URL if needed
         const pokemonList = await response.json();
 
         const select1 = document.getElementById('pokemon1');
@@ -40,6 +41,7 @@ async function populateDropdowns() {
     }
 }
 
+// Function to update names and images based on selected Pokémon
 function updatePokemonInfo() {
     const select1 = document.getElementById('pokemon1');
     const select2 = document.getElementById('pokemon2');
@@ -53,25 +55,36 @@ function updatePokemonInfo() {
     }
 }
 
+// Function to compare stats between the two selected Pokémon
 function comparePokemonStats() {
     const select1 = document.getElementById('pokemon1').value;
     const select2 = document.getElementById('pokemon2').value;
 
-    fetch('http://localhost:3000/pokemon/all')
+    // Mapping of original stat names to user-friendly labels
+    const statLabels = {
+        attack: 'Attack',
+        speed: 'Speed',
+        defence: 'Defence',
+        special_attack: 'Special Attack',
+        special_defence: 'Special Defence',
+        hp: 'HP'
+    };
+
+    fetch('http://localhost:3000/pokemon/all') // Update URL if needed
         .then(response => response.json())
         .then(pokemonList => {
             const pokemon1 = pokemonList.find(p => p.pokedex_number == select1);
             const pokemon2 = pokemonList.find(p => p.pokedex_number == select2);
 
             if (pokemon1 && pokemon2) {
-                const stats = ['attack', 'speed', 'defence', 'special_attack', 'special_defence', 'hp'];
+                const stats = Object.keys(statLabels);
                 const tbody = document.querySelector('#comparison-table tbody');
                 tbody.innerHTML = '';
 
                 stats.forEach(stat => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${stat}</td>
+                        <td>${statLabels[stat]}</td>
                         <td>${pokemon1[stat]}</td>
                         <td>${pokemon2[stat]}</td>
                         <td style="color: ${pokemon1[stat] > pokemon2[stat] ? 'green' : 'red'};">
