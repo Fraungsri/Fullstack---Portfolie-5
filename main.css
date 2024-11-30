@@ -253,3 +253,19 @@ tr:hover {
         max-width: none;
     }
 }
+
+table th[data-attribute] {
+    position: relative;
+}
+
+table th[data-attribute].ascending::after {
+    content: " ▲";
+    font-size: 0.8em;
+    color: #555;
+}
+
+table th[data-attribute].descending::after {
+    content: " ▼";
+    font-size: 0.8em;
+    color: #555;
+}

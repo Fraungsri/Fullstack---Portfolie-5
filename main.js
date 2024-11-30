@@ -182,6 +182,58 @@ function handleSearch(e) {
     displayPokemon(filteredPokemon);
 }
 
+// Function to sort and display the Pokémon table
+let currentSort = { attribute: null, ascending: true };
+
+function handleSort(event) {
+    const attribute = event.target.getAttribute('data-attribute');
+
+    if (!attribute) return;
+
+    // Toggle sorting order
+    if (currentSort.attribute === attribute) {
+        currentSort.ascending = !currentSort.ascending;
+    } else {
+        currentSort.attribute = attribute;
+        currentSort.ascending = true;
+    }
+
+    // Sort the Pokémon array
+    allPokemon.sort((a, b) => {
+        let valA = a[attribute] || ''; // Use an empty string for undefined/null values
+        let valB = b[attribute] || '';
+
+        // Convert to lowercase for case-insensitive sorting (for text fields like name or type)
+        if (typeof valA === 'string') valA = valA.toLowerCase();
+        if (typeof valB === 'string') valB = valB.toLowerCase();
+
+        if (valA < valB) return currentSort.ascending ? -1 : 1;
+        if (valA > valB) return currentSort.ascending ? 1 : -1;
+        return 0;
+    });
+
+    // Re-render the table
+    displayPokemon(allPokemon);
+
+    // Update header styles
+    const headers = document.querySelectorAll('#pokemon-table th[data-attribute]');
+    headers.forEach(header => header.classList.remove('ascending', 'descending'));
+
+    // Add the relevant class to the clicked header
+    event.target.classList.add(currentSort.ascending ? 'ascending' : 'descending');
+
+    console.log(`${event.target.textContent} sorted ${currentSort.ascending ? 'ascending' : 'descending'}`);
+}
+
+// Add sorting event listeners to table headers
+function addSortingListeners() {
+    const headers = document.querySelectorAll('#pokemon-table th[data-attribute]');
+    headers.forEach(header => {
+        header.style.cursor = 'pointer'; // Make headers look clickable
+        header.addEventListener('click', handleSort);
+    });
+}
+
 // Function to add event listeners
 function addEventListeners() {
     // Event listener for the search input
@@ -202,4 +254,7 @@ function addEventListeners() {
     // Event listeners for the comparison dropdowns
     document.getElementById('pokemon1').addEventListener('change', comparePokemonStats);
     document.getElementById('pokemon2').addEventListener('change', comparePokemonStats);
+
+    addSortingListeners();
 }
+
