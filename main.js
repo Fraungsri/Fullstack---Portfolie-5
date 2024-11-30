@@ -70,13 +70,13 @@ function createNameCell(pokemon, row) {
 // Create a type cell with styling
 function createTypeCell(type, row) {
     const cell = document.createElement('td');
-    if (type !== 'Unknown') {
+    if (type !== 'null' && type !== null) {
         const typeButton = document.createElement('span');
         typeButton.textContent = type;
         typeButton.className = `type-button type-${type.toLowerCase()}`;
         cell.appendChild(typeButton);
     } else {
-        cell.textContent = type;
+        cell.textContent = '';
     }
     row.appendChild(cell);
 }
