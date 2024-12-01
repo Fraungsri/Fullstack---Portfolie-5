@@ -60,7 +60,7 @@ function createImageCell(pokemon, row) {
 function createNameCell(pokemon, row) {
     const cell = document.createElement('td');
     const link = document.createElement('a');
-    link.href = `pokemon-detail.html?id=${pokemon.pokedex_number}`;
+    link.href = `frontend/html/pokemon-detail.html?id=${pokemon.pokedex_number}`;
     link.textContent = pokemon.name || 'Unknown';
     link.classList.add('bold-text'); // Add the CSS class
     cell.appendChild(link);
