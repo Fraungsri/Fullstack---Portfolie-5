@@ -13,10 +13,10 @@ app.use(cors());
 
 //Host, user, password database
 const connection = mysql.createConnection({
-    host: process.env.DBHOST,
-    user: process.env.DBUSER,
-    password: process.env.DBPASSWORD,
-    database: process.env.DBNAME
+        host: process.env.DBHOST,
+        user: process.env.DBUSER,
+        password: process.env.DBPASSWORD,
+        database: process.env.DBNAME
 })
 
 app.listen(port, () =>{

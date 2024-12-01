@@ -2,7 +2,7 @@
   "name": "Fullstack - Portfolie 5",
   "version": "1.0.0",
   "description": "",
-  "main": "frontend/js/main.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
