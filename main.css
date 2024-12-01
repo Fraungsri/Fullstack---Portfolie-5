@@ -60,14 +60,17 @@ header {
 
 #compare-btn {
     flex: 1;
-    padding: 12px;
+    padding: 10px 51px;
     font-size: 1rem;
+    width: 100%;
     background-color: var(--primary-color);
     color: var(--text-color);
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    text-align: center;
+    margin-left:720px;
+
+
 }
 
 #compare-btn:hover {
@@ -289,3 +292,21 @@ table th[data-attribute].descending::after {
     font-size: 0.8em;
     color: #555;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

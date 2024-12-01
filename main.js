@@ -62,7 +62,7 @@ function createNameCell(pokemon, row) {
     const link = document.createElement('a');
     link.href = `pokemon-detail.html?id=${pokemon.pokedex_number}`;
     link.textContent = pokemon.name || 'Unknown';
-    link.classList.add('bold-text'); // Add the CSS class
+    link.classList.add('bold-text'); // Adding the css
     cell.appendChild(link);
     row.appendChild(cell);
 }
